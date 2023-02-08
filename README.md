@@ -1,6 +1,9 @@
 # Analyzing-Reddit-and-Netflix-Datasets-using-Spark
 
 NetflixGraphGenerate.java:
+
+
+
 • The code creates a Spark Session.
 • The next step is to read in the input file from where we want to start reading data from and
 converts it into a Java RDD.
