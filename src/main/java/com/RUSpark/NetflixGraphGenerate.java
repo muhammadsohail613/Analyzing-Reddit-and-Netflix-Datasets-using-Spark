@@ -71,7 +71,7 @@ public class NetflixGraphGenerate {
     try {
       JavaRDD<String> lines = spark.read().textFile(args[0]).javaRDD();
       List<Tuple2<Tuple2<Integer, Integer>, Integer>> edges =
-          similarityEdges(lines, minWeight).collect();
+          new ArrayList<>(similarityEdges(lines, minWeight).collect());
       edges.sort(Comparator
           .comparing((Tuple2<Tuple2<Integer, Integer>, Integer> e) -> e._1()._1())
           .thenComparing(e -> e._1()._2()));
