@@ -1,102 +1,151 @@
-# Analyzing-Reddit-and-Netflix-Datasets-using-Spark
+<div align="center">
 
-NetflixGraphGenerate.java:
+# Spark Reddit & Netflix Analytics
 
+**Distributed batch analytics on Reddit and Netflix-style datasets, built with Apache Spark (Java RDD API).**
 
+[![CI](https://github.com/muhammadsohail613/Analyzing-Reddit-and-Netflix-Datasets-using-Spark/actions/workflows/ci.yml/badge.svg)](https://github.com/muhammadsohail613/Analyzing-Reddit-and-Netflix-Datasets-using-Spark/actions/workflows/ci.yml)
+![Java](https://img.shields.io/badge/Java-11%2B-ED8B00?logo=openjdk&logoColor=white)
+![Apache Spark](https://img.shields.io/badge/Apache%20Spark-3.5-E25A1C?logo=apachespark&logoColor=white)
+![Maven](https://img.shields.io/badge/build-Maven-C71A36?logo=apachemaven&logoColor=white)
+![License](https://img.shields.io/badge/license-MIT-blue)
 
-• The code creates a Spark Session.
-• The next step is to read in the input file from where we want to start reading data from and
-converts it into a Java RDD.
-• The movieID is then used to create a new tuple with an Integer value for movieID and
-customerID.
-• The rating is then parsed from the next line of input, which creates a new tuple with an Integer
-value for rating.
-• The code parses the movieID, ratings and makes new tuple.
-• Then movieID and ratings are stored into a tuple.
-• The another tuple is created that contains the first tuple along with customerID.
-• The purpose of this code is to create a new tuple with three elements: movieID, rating, and
-customerID.
-• The these there values are printed to the screen.
-NetflixMovieAverage.java:
-• The code starts by reading the input file and creating a SparkSession.
-• Then iterates through each line of text in the file, splitting it into an array of strings using a
-regular expression that matches commas.
-• Next, it parses out the first string from each array to get the movie ID.
-• The next step is to create an RDD called lines which contains all of the lines in our input file as
-Java objects.
-• Then we map this RDD to a new RDD called temp which will contain pairs with two elements:
-one being an integer representing the movie: ID and another being a float representing how
-many times that movie was streamed on Netflix during its lifetime (in millions).
-• After that a text file is read and transformed it into a JavaPairRDD.
-• The function mapToPair takes in a String and splits it into multiple strings.
-• Then iterates over the lines of text and creates a JavaPairRDD.
-• It groups the RDD by splitting on commas in order to create an RDD with two elements: one
-for each line of text. The mapToPair method then takes each element from the RDD and returns
-a new pair consisting of the movie ID and rating.
-• The resulting output corresponds to the movie ID and the rating corresponding to that movie
-ID.
-• Then it creates a new RDD called cleanSlate.
-• It then uses the reduceByKey method to create an RDD of JavaPairRDD objects.
-• After that creates a counter that counts how many times each movieID appears in the data set.
-• The next line creates an object called temp which is initialized with a list of tuples containing
-two integers and one float value for each movieID in the data set.
-• Next, it iterates over all pairs of values (i1, i2) where i1 is greater than or equal to 0 and less
-than or equal to count-1 (the total number of movies).
-• It then calls reduceByKey on both input RDDs: counter and counts.
-• This results in two new RDDs: totalOccurences and finalOutput respectively.
-• Finally, it maps over each tuple from finalOutput using mapToPair to produce a list containing
-two integers representing the movie ID followed by its average rating.
-• The code will produce a new RDD with the following shape: (movieID, Σ Rating) The code
-above will first collect all the movie IDs from the input data and then compute the average
-rating for each movie.
-• The output of this code is a new RDD with two values: (movieID, Σ Rating).
-RedditHourImpact.java:
-• The code creates a SparkSession object, which is used to interact with Spark's API.
-• Next, it defines a function that takes two arguments: an input string and a format string that
-specifies how the date should be formatted.
-• It uses this function to parse the input string into a Date object using SimpleDateFormat's
-format method and returns it as a Tuple2 value (a tuple containing two values).
-• Next, it creates an RDD from the parsed date data using JavaPairRDD's rdd method on String
-type.
-• Then it filters out any nulls from this RDD using filterByNullsOn() method on String type of
-data because all its elements are strings too.
-• Finally, it prints out some statistics about this RDD using collect().
-• The code creates an instance of the JavaPairRDD class, which is used for reading and writing
-data in RDD format. The code creates an instance of the JavaRDD class, which is used for
-reading and writing data in DataFrame format.
-• Next, it checks to see if there is a comma after the first argument (the input path).
-• If so, then it uses that as the delimiter for parsing out all of the arguments from that point on.
-• Next, it creates a pattern using COMMA and parses out all of the arguments into individual
-fields with commas between them. Then they are put into variables for later use.
-• The code will read the file specified and print out a list of all the rows.
-• The following code is what is called an "in-line" function.
-• This means that this function can be placed within other functions in order to execute them with
-one line of code.
-• The mapToPair method is used to convert each line in the JavaRDD into a Tuple2.
-• The reduceByKey method is used to group all of the Tuple2 pairs together by their key value.
-• The sortByKey method sorts all of these grouped pairs by their key values.
-• The collect method iterates over all of these grouped pairs and prints them out on screen
-RedditPhotoImpact.java:
-• The code first creates a SparkSession object.
-• InputPath of the csv reddit data file that is to be read.
-• ID, upvotes, downvotes and comments are stored in variable from the file.
-• The code then calls the JavaRDD method to convert Input file and store it in “lines” variable.
-• Then from the data read from text file the impact is calculated using following formula:
-impact = upvote + downvote + comments
-• The resulting impact is printed to the screen.
-Based on the result of RedditPhotoImpact, the most impactful photo of the whole dataset is “1437” which has an impact of 192896.
-Photo ID Impact
-1437 192896
-Based on the result of RedditHourImpact, the most impactful hour of the whole dataset is “20:00” which has an impact /reach of 15057971.
-Hour(EST) Impact
-20 15057971
+</div>
 
-Based on the result of NetflixMovieAverage, the highest average rated movies are
-Movie ID
-7485
-7230
-14961
-Average Rating
-4.74 4.72 4.72
-Difficulties in Project:
-Setting up spark on the local computer was difficult as due to 32 bit version libraries of hadoop that were causing issues in running of code. Also incompatible java version also caused issues as spark can only run on java 8 and java 11. Java 11 was installed instead of previously installed java 17 to resolve the second issue while 64 bit hadoop libraries were installed to resolve the first issue.
+---
+
+## Overview
+
+Four self-contained Spark jobs that turn raw CSV data into answers: which Reddit photo got the
+most engagement, what time of day is Reddit most active, which Netflix movies are rated highest,
+and which customers have the most similar taste.
+
+| Job | Question it answers | Spark pattern |
+|---|---|---|
+| [`RedditPhotoImpact`](src/main/java/com/RUSpark/RedditPhotoImpact.java) | Which photo has the highest total engagement? | `mapToPair` → `reduceByKey` → `sortByKey` |
+| [`RedditHourImpact`](src/main/java/com/RUSpark/RedditHourImpact.java) | Which hour of the day (US Eastern) drives the most engagement? | `mapToPair` → `reduceByKey` → `sortByKey` |
+| [`NetflixMovieAverage`](src/main/java/com/RUSpark/NetflixMovieAverage.java) | What is each movie's average rating? | single-pass `aggregateByKey` (sum, count) |
+| [`NetflixGraphGenerate`](src/main/java/com/RUSpark/NetflixGraphGenerate.java) | Which customers rate movies alike, and how strongly? | `distinct` → `groupByKey` → `flatMapToPair` → `reduceByKey` |
+
+> **Impact** = `upvotes + downvotes + comments`, summed over all rows for a photo or an hour.
+
+## Key results (full dataset)
+
+| Insight | Result |
+|---|---|
+| Most impactful Reddit photo | **#1437**, impact **192,896** |
+| Most impactful hour (EST) | **20:00**, impact **15,057,971** |
+| Highest-rated Netflix movies | **#7485** (4.74), **#7230** (4.72), **#14961** (4.72) |
+
+## Architecture
+
+```mermaid
+flowchart LR
+    A[(CSV input)] --> B[Spark: read text → RDD]
+    B --> C{Job}
+    C --> D[RedditPhotoImpact<br/>key = image id]
+    C --> E[RedditHourImpact<br/>key = hour of day, EST]
+    C --> F[NetflixMovieAverage<br/>key = movie id]
+    C --> G[NetflixGraphGenerate<br/>key = movie, rating]
+    D & E --> H[reduceByKey: sum impact]
+    F --> I[aggregateByKey: sum, count → mean]
+    G --> J[group customers → all pairs → count]
+    H & I & J --> K[sortByKey / collect → stdout]
+```
+
+## Quick start
+
+**Prerequisites:** JDK 11 or 17, Maven 3.6+. (Apache Spark itself is only needed for `spark-submit`;
+the tests and the demo below run Spark in-process.)
+
+```bash
+git clone https://github.com/muhammadsohail613/Analyzing-Reddit-and-Netflix-Datasets-using-Spark.git
+cd Analyzing-Reddit-and-Netflix-Datasets-using-Spark
+
+mvn verify            # compile + run the test suite
+```
+
+Run a job on the bundled sample data with `spark-submit`:
+
+```bash
+scripts/run.sh RedditPhotoImpact    data/sample/reddit_sample.csv
+scripts/run.sh RedditHourImpact     data/sample/reddit_sample.csv
+scripts/run.sh NetflixMovieAverage  data/sample/netflix_sample.csv
+scripts/run.sh NetflixGraphGenerate data/sample/netflix_sample.csv      # optional 3rd arg: minimum edge weight
+```
+
+### Example output (sample data)
+
+```text
+$ scripts/run.sh NetflixMovieAverage data/sample/netflix_sample.csv
+1 4.67
+2 5.00
+3 3.33
+
+$ scripts/run.sh RedditHourImpact data/sample/reddit_sample.csv
+0 6
+7 6
+17 147
+18 16
+
+$ scripts/run.sh NetflixGraphGenerate data/sample/netflix_sample.csv
+(10,20) 2
+(10,30) 1
+(20,30) 1
+```
+
+For a Top-N view of the Netflix averages: `... | sort -k2 -nr | head -3`.
+
+## Input formats
+
+Both datasets are plain CSV files with no header row. Double-quoted fields may contain commas.
+
+| Dataset | Columns (in order) |
+|---|---|
+| Reddit | `image_id, unix_time, title, total_votes, upvotes, downvotes, comments` |
+| Netflix | `movie_id, customer_id, rating, date` |
+
+The full datasets are not committed because of their size; small samples live in [`data/sample/`](data/sample).
+
+## Design notes
+
+- **Testable by construction.** Each job exposes its core transformation as a pure function over
+  `JavaRDD<String>`; `main` only does I/O. The JUnit tests run the real Spark engine (`local[2]`)
+  against the sample data and assert exact results, including a DST edge case for the hour job.
+- **One pass over the data.** `NetflixMovieAverage` carries `(sum, count)` through a single
+  `aggregateByKey`, instead of computing sums and counts separately and joining them with a
+  driver-side lookup.
+- **Correct time handling.** Hours are derived with `java.time` in `America/New_York`, so daylight
+  saving is handled correctly and there is no thread-unsafe `SimpleDateFormat` inside a closure.
+- **Overflow-safe sums.** Impact totals use `long`; ratings use `double` rather than `float`.
+- **Honest complexity.** `NetflixGraphGenerate` emits *n(n−1)/2* pairs per `(movie, rating)` bucket,
+  so popular movies dominate its cost. The optional `minWeight` argument prunes the output.
+  Duplicate rows are removed first so a customer is never paired with themselves.
+
+## Project structure
+
+```text
+.
+├── pom.xml                              # Maven build (Spark 3.5, JUnit 5)
+├── src/main/java/com/RUSpark/           # The four jobs + shared CSV helper
+├── src/test/java/com/RUSpark/           # Spark-backed JUnit tests
+├── data/sample/                         # Tiny datasets used by the demo and tests
+├── scripts/run.sh                       # spark-submit wrapper
+└── .github/workflows/ci.yml             # Build + test on JDK 11 and 17
+```
+
+## Lessons learned
+
+- Spark runs on specific JDK versions only. Using an unsupported JDK (e.g. 17 with older Spark 3.x)
+  fails at startup; the build pins a compatible Spark release and passes the required
+  `--add-opens` flags for modern JDKs.
+- On Windows, Hadoop's native libraries (`winutils`) must match the machine architecture (64-bit);
+  a 32-bit build causes cryptic I/O failures when Spark touches the local filesystem.
+
+## Tech stack
+
+Java · Apache Spark (RDD API) · Maven · JUnit 5 · GitHub Actions
+
+## License
+
+Released under the [MIT License](LICENSE).
